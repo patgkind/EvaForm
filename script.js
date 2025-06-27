@@ -1,32 +1,41 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAvnEkO8T6f8O2ATbXLpwWXCnMgO4SYvvvswcgxz96sFl4PUmqXPucZlyfxNyaDnW1Ww/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("evalForm");
+
+  // Check if already submitted
+  if (localStorage.getItem("evalSubmitted") === "true") {
+    form.innerHTML = "<p style='text-align:center;font-size:16px;color:#80d8ff;'>You have already submitted this form. Thank you!</p>";
+    return;
+  }
+
+  // Load student list and build form
   fetch("students.json")
     .then(res => res.json())
-    .then(buildForm)
+    .then(students => buildForm(students))
     .catch(err => {
       alert("Failed to load student list.");
       console.error(err);
     });
 
-  document.getElementById("evalForm").addEventListener("submit", function (e) {
+  // Handle form submission
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    const form = e.target;
-    const formData = new FormData();
+    const data = {};
 
     form.querySelectorAll("textarea").forEach(textarea => {
-      formData.append(textarea.name, textarea.value.trim());
+      data[textarea.name] = textarea.value.trim();
     });
 
     fetch(SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors",
-      body: formData
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     })
+    .then(res => res.text())
     .then(() => {
-      alert("Submission successful!");
-      form.reset();
+      localStorage.setItem("evalSubmitted", "true");
+      form.innerHTML = "<p style='text-align:center;font-size:16px;color:#80d8ff;'>Submission successful. Thank you!</p>";
     })
     .catch(err => {
       console.error("Submission error:", err);
@@ -37,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function buildForm(students) {
   const formFields = document.getElementById("formFields");
-
   students.forEach(student => {
     const div = document.createElement("div");
     div.className = "panel";
