@@ -37,13 +37,18 @@ form {
 }
 
 .panel {
-  margin-bottom: 25px;
+  background-color: #fff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
 }
 
 label {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 textarea {
