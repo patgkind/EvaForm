@@ -1,28 +1,28 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyaeTsvT7EJP1cAnT5UkVhfGqPEup3YElleD6XjFRAcz5nlLUw6qEHmuqkZ-aKdaqbihw/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Load student list and build form
   fetch("students.json")
     .then(res => res.json())
-    .then(students => buildForm(students))
+    .then(buildForm)
     .catch(err => {
       alert("Failed to load student list.");
       console.error(err);
     });
 
+  // Handle form submission
   document.getElementById("evalForm").addEventListener("submit", function (e) {
     e.preventDefault();
+
     const form = e.target;
-    const data = {};
-
-    form.querySelectorAll("textarea").forEach(textarea => {
-      data[textarea.name] = textarea.value.trim();
-    });
-
     const formData = new FormData();
-    Object.keys(data).forEach(key => {
-      formData.append(key, data[key]);
+
+    // Collect textarea values
+    form.querySelectorAll("textarea").forEach(textarea => {
+      formData.append(textarea.name, textarea.value.trim());
     });
-    
+
+    // Submit form data
     fetch(SCRIPT_URL, {
       method: "POST",
       body: formData
@@ -39,18 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Build the form dynamically from students.json
 function buildForm(students) {
   const formFields = document.getElementById("formFields");
 
   students.forEach(student => {
-    const key = student.key;
-    const displayName = student.name;
-
     const div = document.createElement("div");
     div.className = "panel";
     div.innerHTML = `
-      <label for="${key}">Evaluation for ${displayName}:</label>
-      <textarea id="${key}" name="${key}" rows="3" required></textarea>
+      <label for="${student.key}">Evaluation for ${student.name}:</label>
+      <textarea id="${student.key}" name="${student.key}" rows="3" required></textarea>
     `;
     formFields.appendChild(div);
   });
