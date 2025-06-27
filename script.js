@@ -1,14 +1,7 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAvnEkO8T6f8O2ATbXLpwWXCnMgO4SYvvvswcgxz96sFl4PUmqXPucZlyfxNyaDnW1Ww/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; // Replace with your URL
+const isDev = new URLSearchParams(location.search).get("dev") === "1";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("evalForm");
-  const isDev = new URLSearchParams(window.location.search).get("dev") === "1";
-
-  if (!isDev && localStorage.getItem("evalSubmitted") === "true") {
-    form.innerHTML = "<p style='text-align:center;font-size:16px;color:#80d8ff;'>You have already submitted this form. Thank you!</p>";
-    return;
-  }
-
   fetch("students.json")
     .then(res => res.json())
     .then(students => buildForm(students))
@@ -17,45 +10,68 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error(err);
     });
 
+  const form = document.getElementById("evalForm");
+
+  if (!isDev && localStorage.getItem("evalSubmitted") === "true") {
+    form.innerHTML = "<p style='text-align:center;font-size:16px;'>You have already submitted. Thank you!</p>";
+    return;
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-
     const data = {};
-    form.querySelectorAll("textarea").forEach(textarea => {
-      data[textarea.name] = textarea.value.trim();
-    });
+    form.querySelectorAll("textarea").forEach(t => data[t.name] = t.value.trim());
 
     fetch(SCRIPT_URL, {
       method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(data)
     })
-    .then(res => res.text())
+    .then(res => {
+      if (!res.ok) throw new Error("Submission failed");
+      return res.text();
+    })
     .then(() => {
+      alert("Submission successful!");
+      form.reset();
       if (!isDev) localStorage.setItem("evalSubmitted", "true");
-      form.innerHTML = "<p style='text-align:center;font-size:16px;color:#4caf50;'>Submission successful. Thank you!</p>";
     })
     .catch(err => {
-      console.error("Submission error:", err);
-      alert("Error submitting form. Please try again.");
+      console.warn("Direct submission error. Attempting fallback:", err);
+
+      // Fallback: check if data already saved in sheet
+      fetch(SCRIPT_URL)
+        .then(res => res.json())
+        .then(rows => {
+          const match = rows.some(row =>
+            Object.entries(data).every(([key, value]) => row[key] === value)
+          );
+
+          if (match) {
+            alert("Submission confirmed (via fallback).");
+            form.reset();
+            if (!isDev) localStorage.setItem("evalSubmitted", "true");
+          } else {
+            alert("Submission may have failed. Please try again.");
+          }
+        })
+        .catch(err => {
+          alert("Could not confirm submission. Try again later.");
+          console.error("Fallback failed:", err);
+        });
     });
   });
 });
 
 function buildForm(students) {
-  const formFields = document.getElementById("formFields");
-  formFields.innerHTML = "";
-
-  students.forEach(student => {
+  const container = document.getElementById("formFields");
+  students.forEach(s => {
     const div = document.createElement("div");
     div.className = "panel";
     div.innerHTML = `
-      <label for="${student.key}">Evaluation for ${student.name}:</label>
-      <textarea id="${student.key}" name="${student.key}" rows="3" required></textarea>
+      <label for="${s.key}">Evaluation for ${s.name}:</label>
+      <textarea id="${s.key}" name="${s.key}" rows="3" required></textarea>
     `;
-    formFields.appendChild(div);
+    container.appendChild(div);
   });
 }
