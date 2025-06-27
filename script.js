@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyaeTsvT7EJP1cAnT5UkVhfGqPEup3YElleD6XjFRAcz5nlLUw6qEHmuqkZ-aKdaqbihw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAvnEkO8T6f8O2ATbXLpwWXCnMgO4SYvvvswcgxz96sFl4PUmqXPucZlyfxNyaDnW1Ww/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Load student list and build form
