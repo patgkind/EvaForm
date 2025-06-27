@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAvnEkO8T6f8O2ATbXLpwWXCnMgO4SYvvvswcgxz96sFl4PUmqXPucZlyfxNyaDnW1Ww/exec"; // Replace with your URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwr8RTDWcKgRy-lgipS8-DnQ8dJC4owR4Oh22Vpy4iNE45V8K82IDK7l1adUfhXkPyeiQ/exec"; // Replace with your URL
 const isDev = new URLSearchParams(location.search).get("dev") === "1";
 
 document.addEventListener("DOMContentLoaded", () => {
