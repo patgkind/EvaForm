@@ -44,6 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("evalForm");
+
+  const isDev = new URLSearchParams(window.location.search).get("dev") === "1";
+
+  if (!isDev && localStorage.getItem("evalSubmitted") === "true") {
+    form.innerHTML = "<p style='text-align:center;font-size:16px;color:#80d8ff;'>You have already submitted this form. Thank you!</p>";
+    return;
+  }
+
+  // continue loading students and form...
+});
 function buildForm(students) {
   const formFields = document.getElementById("formFields");
   students.forEach(student => {
