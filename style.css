@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #f0f4ff, #e2eaff);
   color: #2e3a59;
 }
@@ -13,29 +13,26 @@ body {
 }
 
 .sao-form {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #cce5ff;
-  border-radius: 14px;
+  background: #fff;
+  border-radius: 12px;
   padding: 40px 30px;
   max-width: 720px;
   width: 100%;
-  box-shadow: 0 0 20px rgba(0, 123, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.1);
 }
 
 .sao-title {
-  font-family: 'Orbitron', sans-serif;
   text-align: center;
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: 26px;
+  margin-bottom: 12px;
   color: #0077cc;
 }
 
 .sao-desc {
   text-align: center;
   font-size: 15px;
-  color: #55697d;
+  color: #444;
   margin-bottom: 30px;
-  font-weight: 400;
 }
 
 .panel {
@@ -44,9 +41,9 @@ body {
 
 label {
   display: block;
-  font-weight: 500;
-  font-size: 15px;
-  color: #005d99;
+  font-weight: 600;
+  font-size: 14px;
+  color: #003366;
   margin-bottom: 6px;
 }
 
@@ -58,7 +55,6 @@ textarea {
   border-radius: 6px;
   font-size: 14px;
   border: 1px solid #a6c8ff;
-  transition: box-shadow 0.3s, border-color 0.3s;
   resize: vertical;
 }
 
@@ -82,11 +78,9 @@ button {
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 153, 255, 0.4);
-  transition: background 0.2s, box-shadow 0.2s;
+  transition: background 0.2s ease;
 }
 
 button:hover {
   background: #2288dd;
-  box-shadow: 0 0 16px rgba(0, 123, 255, 0.5);
 }

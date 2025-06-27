@@ -1,42 +1,53 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAvnEkO8T6f8O2ATbXLpwWXCnMgO4SYvvvswcgxz96sFl4PUmqXPucZlyfxNyaDnW1Ww/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("evalForm");
+  const isDev = new URLSearchParams(window.location.search).get("dev") === "1";
+
+  if (!isDev && localStorage.getItem("evalSubmitted") === "true") {
+    form.innerHTML = "<p style='text-align:center;font-size:16px;color:#80d8ff;'>You have already submitted this form. Thank you!</p>";
+    return;
+  }
+
   fetch("students.json")
     .then(res => res.json())
-    .then(buildForm)
+    .then(students => buildForm(students))
     .catch(err => {
       alert("Failed to load student list.");
       console.error(err);
     });
 
-  document.getElementById("evalForm").addEventListener("submit", function (e) {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData();
-
+    const data = {};
     form.querySelectorAll("textarea").forEach(textarea => {
-      formData.append(textarea.name, textarea.value.trim());
+      data[textarea.name] = textarea.value.trim();
     });
 
     fetch(SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors",
-      body: formData
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams(data)
     })
+    .then(res => res.text())
     .then(() => {
-      alert("Submission successful!");
-      form.reset();
+      if (!isDev) localStorage.setItem("evalSubmitted", "true");
+      form.innerHTML = "<p style='text-align:center;font-size:16px;color:#4caf50;'>Submission successful. Thank you!</p>";
     })
     .catch(err => {
       console.error("Submission error:", err);
-      alert("Error submitting form.");
+      alert("Error submitting form. Please try again.");
     });
   });
 });
 
 function buildForm(students) {
   const formFields = document.getElementById("formFields");
+  formFields.innerHTML = "";
 
   students.forEach(student => {
     const div = document.createElement("div");
