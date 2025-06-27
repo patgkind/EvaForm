@@ -19,9 +19,12 @@ form {
   max-width: 700px;
   width: 100%;
 }
-.title{
+.title {
   text-align: center;
-  color: aqua;
+  margin-top: 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
 }
 .description {
   text-align: center;
