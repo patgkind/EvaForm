@@ -55,7 +55,7 @@ textarea {
   border-radius: 6px;
   font-size: 14px;
   border: 1px solid #a6c8ff;
-  resize: vertical;
+  resize: none;
 }
 
 textarea:focus {
