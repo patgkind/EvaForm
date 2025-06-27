@@ -18,10 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
       data[textarea.name] = textarea.value.trim();
     });
 
+    const formData = new FormData();
+    Object.keys(data).forEach(key => {
+      formData.append(key, data[key]);
+    });
+    
     fetch(SCRIPT_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      body: formData
     })
     .then(res => res.text())
     .then(() => {
