@@ -1,5 +1,5 @@
 // Replace this with your actual Google Apps Script Web App URL
-const SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWcjWTnTcx4MwRlAD-uAWVUpk5tGHkdBc09HReQElKbOudDfsqohzPIph0dLJDVy-81g/exec";
 
 // Run after page is loaded
 document.addEventListener("DOMContentLoaded", () => {
