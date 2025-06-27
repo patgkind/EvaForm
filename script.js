@@ -1,7 +1,5 @@
-// Replace this with your actual Google Apps Script Web App URL
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWcjWTnTcx4MwRlAD-uAWVUpk5tGHkdBc09HReQElKbOudDfsqohzPIph0dLJDVy-81g/exec";
 
-// Run after page is loaded
 document.addEventListener("DOMContentLoaded", () => {
   fetch("students.json")
     .then(res => res.json())
@@ -11,19 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error(err);
     });
 
-  // Form submission handler
   document.getElementById("evalForm").addEventListener("submit", function (e) {
     e.preventDefault();
-
     const form = e.target;
     const data = {};
 
-    // Gather input values
     form.querySelectorAll("textarea").forEach(textarea => {
       data[textarea.name] = textarea.value.trim();
     });
 
-    // Send data to Google Sheets via Apps Script
     fetch(SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Build the form dynamically
 function buildForm(students) {
   const formFields = document.getElementById("formFields");
 
