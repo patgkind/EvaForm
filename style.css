@@ -1,86 +1,75 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #f6f8fa;
-  color: #333;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f1f3f4;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  padding: 50px 20px;
+.form-wrapper {
+  max-width: 720px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(60,64,67,0.15);
+  padding: 40px 30px;
 }
 
-form {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  max-width: 700px;
-  width: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-.title {
-  text-align: center;
+.form-header h1 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #202124;
   margin: 0 0 10px;
-  font-size: 46px;
-  font-weight: 600;
-  color: #111;
 }
 
-.description {
-  text-align: center;
-  font-size: 15px;
-  margin-bottom: 30px;
-  color: #666;
+.form-header p {
+  font-size: 14px;
+  color: #5f6368;
+  margin: 0 0 30px;
 }
 
-.panel {
-  background-color: #fff;
-  padding: 16px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  margin-bottom: 20px;
+.form-body .panel {
+  margin-bottom: 25px;
 }
 
-label {
-  font-weight: 600;
-  font-size: 16px;
+.panel label {
   display: block;
+  font-size: 16px;
+  font-weight: 500;
   margin-bottom: 8px;
+  color: #202124;
 }
 
-textarea {
+.panel textarea {
   width: 100%;
+  font-size: 14px;
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 15px;
-  background-color: #fafafa;
-  resize: vertical;
-  transition: border 0.3s;
-}
-
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
   background-color: #fff;
+  transition: border-color 0.3s;
 }
 
-button {
-  display: block;
-  margin: 30px auto 0;
-  background-color: #007bff;
+.panel textarea:focus {
+  border-color: #4285f4;
+  outline: none;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-footer button {
+  background-color: #1a73e8;
   color: white;
-  padding: 12px 28px;
+  font-size: 15px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 24px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.form-footer button:hover {
+  background-color: #1558b0;
 }

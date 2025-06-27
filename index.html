@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>BPAFA 1-1 Evaluation</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="form-wrapper">
     <form id="evalForm">
-      <h1 class="title">BPAFA 1-1 Evaluation</h1>
-      <p class="description">
-        Please provide constructive and thoughtful comments for each student. 
-        Your feedback helps support their growth and development.
-      </p>
-      <div id="formFields"></div>
-      <button type="submit">Submit</button>
+      <div class="form-header">
+        <h1>BPAFA 1-1 Evaluation</h1>
+        <p>Please provide constructive and thoughtful comments for each student. Your input helps improve performance and collaboration.</p>
+      </div>
+
+      <div id="formFields" class="form-body"></div>
+
+      <div class="form-footer">
+        <button type="submit">Submit</button>
+      </div>
     </form>
   </div>
   <script src="script.js"></script>
