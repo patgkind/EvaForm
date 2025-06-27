@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWcjWTnTcx4MwRlAD-uAWVUpk5tGHkdBc09HReQElKbOudDfsqohzPIph0dLJDVy-81g/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyaeTsvT7EJP1cAnT5UkVhfGqPEup3YElleD6XjFRAcz5nlLUw6qEHmuqkZ-aKdaqbihw/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   fetch("students.json")
