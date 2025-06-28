@@ -33,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(() => {
       alert("Submission successful!");
-      form.reset();
+        setTimeout(() => {
+    window.location.reload();
+  }, 800);
       if (!isDev) localStorage.setItem("evalSubmitted", "true");
     })
     .catch(err => {
