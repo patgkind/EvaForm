@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error(err);
     });
 
-  const form = document.getElementById("evalForm");
+ // const form = document.getElementById("evalForm");     -----------------------------------------------------TEMPORARY OFF
 
-  if (!isDev && localStorage.getItem("evalSubmitted") === "true") {
-    form.innerHTML = "<p style='text-align:center;font-size:16px;'>You have already submitted. Thank you!</p>";
-    return;
-  }
+//  if (!isDev && localStorage.getItem("evalSubmitted") === "true") {
+//    form.innerHTML = "<p style='text-align:center;font-size:16px;'>You have already submitted. Thank you!</p>";
+//    return;
+//  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
     window.location.reload();
   }, 800);
-      if (!isDev) localStorage.setItem("evalSubmitted", "true");
+      
+   //   if (!isDev) localStorage.setItem("evalSubmitted", "true");       -----------------------------------------------------TEMPORARY OFF
     })
     .catch(err => {
       console.warn("Direct submission error. Attempting fallback:", err);
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (match) {
             alert("Submission confirmed (via fallback).");
             form.reset();
-            if (!isDev) localStorage.setItem("evalSubmitted", "true");
+          //  if (!isDev) localStorage.setItem("evalSubmitted", "true");   -----------------------------------------------------TEMPORARY OFF
           } else {
             alert("Submission may have failed. Please try again.");
           }
